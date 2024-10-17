@@ -1,0 +1,36 @@
+<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-500 mb-3">
+    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+        <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
+            <h1 class="text-white text-lg">{{title}}</h1>
+            <button
+                class="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+                type="button" (click)="toggleNavbar()">
+                <fa-icon [icon]="faBars"></fa-icon>
+                <fa-icon></fa-icon>
+            </button>
+        </div>
+        <div [ngClass]="{'hidden': !showMenu, 'flex': showMenu}" class="lg:flex lg:flex-grow items-center">
+            <ul class="flex flex-col lg:flex-row list-none ml-auto">
+                <li class="nav-item">
+                    <button
+                        class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                        (click)="loginPage()">
+                        <fa-icon [icon]="faSignIn" class="text-lg leading-lg text-white opacity-75"></fa-icon>
+                        <span class="ml-2">Login</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button
+                        class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                        (click)="toggleModal()">
+                        <fa-icon [icon]="faSignUp" class="text-lg leading-lg text-white opacity-75"></fa-icon>
+                        <span class="ml-2">Signup</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<app-sign-up *ngIf="showModal" (modalClosed)="closeModalHandler($event)"  (logInOpen)="loginOpenHandler($event)">
+</app-sign-up>
+<app-log-in *ngIf="isLoginPage" (islogin)="closeLoginHandler($event)"></app-log-in>
